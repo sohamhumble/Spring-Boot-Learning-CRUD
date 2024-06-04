@@ -27,6 +27,9 @@ public class Student {
         this.email = email;
     }
 
+    public Student() {
+    }
+
     //    Define getter and setter methods
     public int getId() {
         return id;
