@@ -13,11 +13,34 @@ public class CruddemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(CruddemoApplication.class, args);
     }
-	@Bean
-    public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+
+    @Bean
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
-			createStudent(studentDAO);
-		};
+//            createStudent(studentDAO);
+            createMultipleStudents(studentDAO);
+        };
+    }
+
+    private void createMultipleStudents(StudentDAO studentDAO) {
+        // create a student
+
+        System.out.println("Creating multiple students");
+        Student tempStudent1 = new Student("Jake", "Logan", "jakelogan@gmail.com");
+        Student tempStudent2 = new Student("John", "Doe", "johndoe@gmail.com");
+        Student tempStudent3 = new Student("Mary","Brown","marybrown@gmail.com");
+
+        //save the new object
+        System.out.println("Saving the students");
+        studentDAO.save(tempStudent1);
+        studentDAO.save(tempStudent2);
+        studentDAO.save(tempStudent3);
+
+        //displaying id
+        System.out.println("Saved students. Generated id: " + tempStudent1.getId());
+        System.out.println("Saved students. Generated id: " + tempStudent2.getId());
+        System.out.println("Saved students. Generated id: " + tempStudent3.getId());
+
     }
 
     private void createStudent(StudentDAO studentDAO) {
