@@ -22,14 +22,23 @@ public class CruddemoApplication {
 //            createStudent(studentDAO);
 //            createMultipleStudents(studentDAO);
 //            readStudent(studentDAO);
-            getStudent(studentDAO);
+//            getStudent(studentDAO);
+            findByStudentFirstName(studentDAO);
         };
+    }
+
+    private void findByStudentFirstName(StudentDAO studentDAO) {
+        System.out.println("Getting all student with first name: Jake");
+        List<Student> studentList = studentDAO.findByFirstName("Jake");
+        for (Student student : studentList) {
+            System.out.println(student);
+        }
     }
 
     private void getStudent(StudentDAO studentDAO) {
         System.out.println("Getting all student sorted by firstName");
-        List<Student>studentList=studentDAO.findAll();
-        for(Student student:studentList){
+        List<Student> studentList = studentDAO.findAll();
+        for (Student student : studentList) {
             System.out.println(student);
         }
     }
@@ -41,13 +50,13 @@ public class CruddemoApplication {
         System.out.println("Saving student object");
         studentDAO.save(tempStudent);
 
-        int theId =tempStudent.getId();
+        int theId = tempStudent.getId();
         System.out.println("Getting student object with id: " + theId);
 
-        System.out.println("Retrieving Student by id:"+ theId);
+        System.out.println("Retrieving Student by id:" + theId);
         Student myStudent = studentDAO.findById(theId);
 
-        System.out.println("Student Found: "+myStudent);
+        System.out.println("Student Found: " + myStudent);
     }
 
     private void createMultipleStudents(StudentDAO studentDAO) {
@@ -56,7 +65,7 @@ public class CruddemoApplication {
         System.out.println("Creating multiple students");
         Student tempStudent1 = new Student("Jake", "Logan", "jakelogan@gmail.com");
         Student tempStudent2 = new Student("John", "Doe", "johndoe@gmail.com");
-        Student tempStudent3 = new Student("Mary","Brown","marybrown@gmail.com");
+        Student tempStudent3 = new Student("Mary", "Brown", "marybrown@gmail.com");
 
         //save the new object
         System.out.println("Saving the students");
