@@ -25,8 +25,26 @@ public class CruddemoApplication {
 //            readStudent(studentDAO);
 //            getStudent(studentDAO);
 //            findByStudentFirstName(studentDAO);
-            updateEmail(studentDAO);
+//            updateEmail(studentDAO);
+            deleteStudent(studentDAO,4);
         };
+    }
+
+    private void deleteStudent(StudentDAO studentDAO, int Id) {
+        Student student = studentDAO.findById(Id);
+        if(student==null){
+            System.out.println("Student with id: "+Id+" not found");
+            return;
+        }
+        System.out.println("Student Data to be deleted : "+student);
+
+        studentDAO.deleteById(Id);
+
+        List<Student>studentList = studentDAO.findAll();
+        System.out.println("Student List after deleting: ");
+        for(Student i:studentList) {
+            System.out.println(i);
+        }
     }
 
     private void updateEmail(StudentDAO studentDAO) {
