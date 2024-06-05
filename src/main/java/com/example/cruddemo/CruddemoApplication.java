@@ -2,6 +2,7 @@ package com.example.cruddemo;
 
 import com.example.cruddemo.dao.StudentDAO;
 import com.example.cruddemo.entity.Student;
+import jakarta.persistence.TypedQuery;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,8 +24,20 @@ public class CruddemoApplication {
 //            createMultipleStudents(studentDAO);
 //            readStudent(studentDAO);
 //            getStudent(studentDAO);
-            findByStudentFirstName(studentDAO);
+//            findByStudentFirstName(studentDAO);
+            updateEmail(studentDAO);
         };
+    }
+
+    private void updateEmail(StudentDAO studentDAO) {
+        Student student = studentDAO.findByFirstName("Peter").getFirst();
+        System.out.println("Student data before updating: " + student);
+
+        student.setEmail("spiderman@gmail.com");
+        studentDAO.update(student);
+
+        student = studentDAO.findByFirstName("Peter").getFirst();
+        System.out.println("Student data after updating: " + student);
     }
 
     private void findByStudentFirstName(StudentDAO studentDAO) {
