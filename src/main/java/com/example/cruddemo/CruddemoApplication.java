@@ -27,7 +27,7 @@ public class CruddemoApplication {
     }
 
     private void getStudent(StudentDAO studentDAO) {
-        System.out.println("Getting all student");
+        System.out.println("Getting all student sorted by firstName");
         List<Student>studentList=studentDAO.findAll();
         for(Student student:studentList){
             System.out.println(student);
