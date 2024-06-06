@@ -2,6 +2,7 @@ package com.example.cruddemo;
 
 import com.example.cruddemo.dao.StudentDAO;
 import com.example.cruddemo.entity.Student;
+import com.example.cruddemo.util.randomData;
 import jakarta.persistence.TypedQuery;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,28 +28,39 @@ public class CruddemoApplication {
 //            findByStudentFirstName(studentDAO);
 //            updateEmail(studentDAO);
 //            deleteStudent(studentDAO,4);
-            deleteAll(studentDAO);
+//            deleteAll(studentDAO);
+            addRandomStudents(studentDAO, 10);
         };
+    }
+
+    private void addRandomStudents(StudentDAO studentDAO, int count) {
+        for (int i = 0; i < count; i++) {
+            String firstName = randomData.getRandomFirstName();
+            String lastName = randomData.getRandomLastName();
+            Student student = new Student(firstName, lastName, randomData.getRandomEmail(firstName, lastName));
+            studentDAO.save(student);
+        }
+
     }
 
     private void deleteAll(StudentDAO studentDAO) {
         System.out.println("Deleting all students...");
-        System.out.println("Number of entries deleted: "+studentDAO.deleteAll());
+        System.out.println("Number of entries deleted: " + studentDAO.deleteAll());
     }
 
     private void deleteStudent(StudentDAO studentDAO, int Id) {
         Student student = studentDAO.findById(Id);
-        if(student==null){
-            System.out.println("Student with id: "+Id+" not found");
+        if (student == null) {
+            System.out.println("Student with id: " + Id + " not found");
             return;
         }
-        System.out.println("Student Data to be deleted : "+student);
+        System.out.println("Student Data to be deleted : " + student);
 
         studentDAO.deleteById(Id);
 
-        List<Student>studentList = studentDAO.findAll();
+        List<Student> studentList = studentDAO.findAll();
         System.out.println("Student List after deleting: ");
-        for(Student i:studentList) {
+        for (Student i : studentList) {
             System.out.println(i);
         }
     }
