@@ -29,7 +29,7 @@ public class CruddemoApplication {
 //            updateEmail(studentDAO);
 //            deleteStudent(studentDAO,4);
 //            deleteAll(studentDAO);
-            addRandomStudents(studentDAO, 10);
+            addRandomStudents(studentDAO, 5);
         };
     }
 
